@@ -4,26 +4,10 @@ variable "marketplace_source_images" {
     is_pricing_associated = bool
     compatible_shapes = set(string)
   }))
-
-  default = {
-    main_mktpl_ogg_oracleclassic_image = {
-      ocid = "ocid1.image.oc1..aaaaaaaaftlazxgiid6munx5yvxza7gi2nogs45wvbivsthzlwpekzsikmwq"
-      is_pricing_associated = true
-      compatible_shapes = []
-    }
-  }
-}
-
-variable "marketplace_source_images2" {
-  type = map(object({
-    ocid = string
-    is_pricing_associated = bool
-    compatible_shapes = set(string)
-  }))
  
   default = {
       image = {
-      ocid = "ocid1.image.oc1..aaaaaaaay65ebdc7zge3z3fimpktuso35fdsgx6aoyk5rmu7za3oe7zf3cnq"
+      ocid = "ocid1.image.oc1..aaaaaaaamkebmwfvbzulzhvabsmfxkmvg2vx3d7mzl4fp6midhzacetkmsoq"
       is_pricing_associated = true
       compatible_shapes = []
     }

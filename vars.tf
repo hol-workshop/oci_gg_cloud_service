@@ -3,14 +3,9 @@ variable "region" {}
 variable "compartment_ocid" {}
 
 ################################ Quotas
-variable "source_pgsql_compute_shape" {
-  default = "VM.Standard.E2.1"
-}
-variable "ogg_pgsql_compute_shape" {
-  default = "VM.Standard2.1"
-}
-variable "ogg_micro_compute_shape" {
-  default = "VM.Standard2.1"
+
+variable "source_db_compute_shape" {
+  default = "VM.Standard2.2"
 }
 ################################ VCN
 
@@ -68,10 +63,10 @@ variable "holvcn_nat_cidr_block" {
 
 ################################ TARGET ATP
 variable "atp_display_name" {
-  default = "HOL Target ATP"
+  default = "Target ATP"
 }
 variable "atp_db_name" {
-  default = "hol"
+  default = "target"
 }
 variable "atp_db_version" {
   default = "19c"
@@ -152,157 +147,27 @@ variable "source_postgre_image_ocid" {
   }
 }
 
-################################ OGG POSTGRESQL BLOCK VOLUME
-//
-variable "ogg_pgsql_bv_display_name" {
-  default = "OGG_PGSQL BlockVolume"
-}
-variable "boot_size_in_gbs" {
-  default = "50"
-}
-variable "ogg_pgsql_swap_size_in_gbs" {
-  default = "50" //256
-}
-variable "ogg_pgsql_trails_size_in_gbs" {
-  default = "50" //512
-}
-variable "ogg_pgsql_deployments_size_in_gbs" {
-  default = "50"
+################################ Source DB IMAGE
+variable "source_dbms" {
+  default = "Oracle_Database"
 }
 
-// OGG Deployment volume
-variable "ogg_pgsql_deployments_volume_id" {
-  default = ""
+variable "source_dbms_version" {
+  default = "12.2.0.1.210420_-_AL7U9"
 }
 
-// OGG Trails volume
-variable "ogg_pgsql_trails_volume_id" {
-  default = ""
-}
-################################ OGG MICRO BLOCK VOLUME
-//
-variable "ogg_micro_bv_display_name" {
-  default = "OGG_Micro BlockVolume"
-}
-
-variable "ogg_micro_swap_size_in_gbs" {
-  default = "50"  //256
-}
-variable "ogg_micro_trails_size_in_gbs" {
-  default = "50"  //512
-}
-variable "ogg_micro_deployments_size_in_gbs" {
+variable "source_db_boot_size_in_gbs" {
   default = "50"
 }
-variable "ogg_micro_cacheManager_size_in_gbs" {
-  default = "50"
+variable "source_db_display_name" {
+  default = "Source Database VM"
 }
-// OGG Deployment volume
-variable "ogg_micro_deployments_volume_id" {
-  default = ""
+variable "source_db_hostname_label" {
+  default = "oracle12dbms"
 }
-// OGG CacheManager volume
-variable "ogg_micro_cacheManager_volume_id" {
-  default = ""
-}
-// OGG Trails volume
-variable "ogg_micro_trails_volume_id" {
-  default = ""
-}
-################################ OGG PGSQL IMAGE
-variable "ogg_pgsql_dbms" {
-  default = "postgresql"
-}
-variable "ogg_pgsql_edition" {
-  default = "Classic"
-}
-variable "ogg_pgsql_version" {
-  default = "19.1.0.0.201013"
-}
-variable "image_compartment_id" {
-  default = ""
-}
-################################ OGG PGSQL INSTANCE
-variable "ogg_pgsql_assign_public_ip" {
-  default = true
-}
-variable "ogg_pgsql_boot_size_in_gbs" {
-  default = "50"
-}
-variable "ogg_pgsql_display_name" {
-  default = "HOL OGG PGSQL"
-}
-variable "ogg_pgsql_hostname_label" {
-  default = "ogg19cpgsql"
-}
-variable "ogg_pgsql_custom_volume_sizes" {
+variable "source_db_custom_volume_sizes" {
   default = false
 }
-################################ OGG Micro IMAGE
-variable "ogg_micro_dbms" {
-  default = "Oracle"
-}
-variable "ogg_micro_edition" {
-  default = "Microservices"
-}
-variable "ogg_micro_version" {
-  default = "19.1.0.0.201013"
-}
-################################ OGG MICRO INSTANCE
-variable "ogg_micro_assign_public_ip" {
+variable "source_db_assign_public_ip" {
   default = true
-}
-variable "ogg_micro_boot_size_in_gbs" {
-  default = "50"
-}
-variable "ogg_micro_display_name" {
-  default = "HOL OGG Microservices"
-}
-variable "ogg_micro_hostname_label" {
-  default = "ogg19micro"
-}
-variable "ogg_micro_custom_volume_sizes" {
-  default = false
-}
-################################ OGG MICRO GG CONFIGURATION
-
-variable deployments_json {
-  default = ""
-}
-
-variable deployment_1_name {
-  default = "Source"
-}
-
-variable deployment_1_dbms {
-  default = "Oracle 11g (11.2.0.4)"
-}
-variable deployment_1_adb {
-  default = false
-}
-variable deployment_1_adb_id {
-  default = ""
-}
-variable deployment_1_adb_compartment_id {
-  default = ""
-}
-
-variable deployment_2_name {
-  default = "Target"
-}
-
-variable deployment_2_dbms {
-  default = "Oracle 19c (19.x)"
-}
-
-variable deployment_2_adb {
-  default = true
-}
-
-variable deployment_2_adb_compartment_id {
-  default = ""
-}
-
-variable deployment_2_adb_id {
-  default = ""
 }

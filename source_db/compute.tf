@@ -1,6 +1,6 @@
-resource "oci_core_instance" "vm0" {
+resource "oci_core_instance" "vm1" {
 	availability_domain = var.availability_domain
-	compartment_id    	= var.compartment_id
+	compartment_id      = var.compartment_id
 	display_name        = var.display_name
 	shape               = var.compute_shape
 	create_vnic_details {
@@ -16,6 +16,6 @@ resource "oci_core_instance" "vm0" {
 	}
 	metadata = {
 		ssh_authorized_keys = var.ssh_public_key
-		user_data = data.template_cloudinit_config.source_postgre_cloud_init.rendered
+	/*	user_data = data.template_cloudinit_config.source_postgre_cloud_init.rendered  */
 	}
 }
