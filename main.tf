@@ -26,7 +26,7 @@ module "source_db_compute" {
 	source                	= "./source_db"
 	compartment_id      	= var.compartment_ocid
 	availability_domain   	= data.oci_identity_availability_domains.ads.availability_domains[0].name
-	ssh_public_key			= file("~/.ssh/id_rsa.pub")
+	ssh_public_key			= file("~/.ssh/oci.pub")
 	boot_size_in_gbs      	= var.source_db_boot_size_in_gbs
 	display_name          	= var.source_db_display_name
 	hostname_label        	= var.source_db_hostname_label
