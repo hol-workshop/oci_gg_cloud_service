@@ -16,6 +16,6 @@ resource "oci_core_instance" "vm1" {
 	}
 	metadata = {
 		ssh_authorized_keys = var.ssh_public_key
-	/*	user_data = data.template_cloudinit_config.source_postgre_cloud_init.rendered  */
+		user_data = data.template_cloudinit_config.source_db_cloud_init.rendered 
 	}
 }

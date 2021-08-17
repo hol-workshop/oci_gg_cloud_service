@@ -97,27 +97,41 @@ variable "database_id" {
   default = ""
 }
 
-################################ SOURCE PGSQL
-variable "source_pgsql_assign_public_ip" {
-  default = true
+
+
+################################ Source DB IMAGE
+variable "source_dbms" {
+  default = "Oracle_Database"
 }
-variable "source_pgsql_boot_size_in_gbs" {
-  default = "50"
+
+variable "source_dbms_version" {
+  default = "12.2.0.1.210420_-_AL7U9"
 }
-variable "source_pgsql_hostname_label" {
-  default = "sourcedb"
+
+variable "source_db_boot_size_in_gbs" {
+  default = "250"
 }
-variable "source_pgsql_custom_volume_sizes" {
+variable "source_db_display_name" {
+  default = "Source Database VM"
+}
+variable "source_db_hostname_label" {
+  default = "oracle12dbms"
+}
+variable "source_db_custom_volume_sizes" {
   default = false
 }
-variable "source_pgsql_display_name" {
-  default = "HOL Source PGSQL"
+variable "source_db_assign_public_ip" {
+  default = true
 }
+variable "image_compartment_id" {
+  default = ""
+}
+
 variable "source_postgre_image_ocid" {
   type = map(string)
 
   default = {
-    	ap-chuncheon-1 	= "ocid1.image.oc1.ap-chuncheon-1.aaaaaaaa4m7auvu5xbygu3ufuxayr5hiv53kjbhuae2v23ceezfh23l5ljla"
+    ap-chuncheon-1 	= "ocid1.image.oc1.ap-chuncheon-1.aaaaaaaa4m7auvu5xbygu3ufuxayr5hiv53kjbhuae2v23ceezfh23l5ljla"
 	ap-hyderabad-1 	= "ocid1.image.oc1.ap-hyderabad-1.aaaaaaaamagn4cvnqlhl263dyeomjtquwtdb7c26rxaexnakbcv2xwe2y5za"
 	ap-melbourne-1 	= "ocid1.image.oc1.ap-melbourne-1.aaaaaaaawnjddjpgrw6prdf5i3soh4ifd7afdnux3iby2aqksz2b2rblhcra"
 	ap-mumbai-1 	= "ocid1.image.oc1.ap-mumbai-1.aaaaaaaaowjhuftuftocybrcshdis7fi47w7yxqpgu332h3ke4fp5rkkgwqq"
@@ -147,27 +161,77 @@ variable "source_postgre_image_ocid" {
   }
 }
 
-################################ Source DB IMAGE
-variable "source_dbms" {
-  default = "Oracle_Database"
+########################### Goldengate service
+
+variable "deployment_cpu_core_count" {
+  	default = 1
 }
 
-variable "source_dbms_version" {
-  default = "12.2.0.1.210420_-_AL7U9"
+variable "deployment_deployment_type" {
+  	default = "OGG"
 }
 
-variable "source_db_boot_size_in_gbs" {
-  default = "50"
+variable "deployment_display_name" {
+  	default = "HOL_GG_Service"
 }
-variable "source_db_display_name" {
-  default = "Source Database VM"
+
+variable "deployment_is_auto_scaling_enabled" {
+  	default = true
 }
-variable "source_db_hostname_label" {
-  default = "oracle12dbms"
+
+variable "deployment_license_model" {
+  	default = "LICENSE_INCLUDED"
 }
-variable "source_db_custom_volume_sizes" {
-  default = false
+
+variable "deployment_is_public" {
+  	default = true
 }
-variable "source_db_assign_public_ip" {
-  default = true
+
+
+
+variable "deployment_ogg_data_admin_password" {
+  	default = "CloudStars#123"
+}
+
+variable "deployment_ogg_data_admin_username" {
+  default = "oggadmin"
+}
+
+variable "deployment_ogg_data_deployment_name" {
+  default = "deployment"
+}
+
+variable "deployment_state" {
+  	default = "ACTIVE"
+}
+########################## TargetDB Registration
+
+variable "target_alias_name" {
+  default = "target19"
+}
+variable "target_display_name" {
+  default = "TargetDB"
+}
+variable "target_database_id" {
+  default = ""
+}
+variable "target_password" {
+  default = "GG##lab12345"
+}
+variable "target_username" {
+  default = "ggadmin"
+}
+########################## SourceDB Registration
+
+variable "source_alias_name" {
+  default = "source12"
+}
+variable "source_display_name" {
+  default = "SourceDB"
+}
+variable "source_password" {
+  default = "GG##lab12345"
+}
+variable "source_username" {
+  default = "ggadmin"
 }

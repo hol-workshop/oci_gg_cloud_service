@@ -11,6 +11,11 @@ module "atp" {
 	license_model	= var.atp_license_model
 	generate_type	= var.atp_wallet_generate_type
 }
+
+output "ATP_generated_password" {
+  value = module.atp.ATP_generated_password
+}
+
 module "source_db_image" {
 	source            = "./source_image"
 	compartment_id  = var.image_compartment_id
@@ -31,10 +36,42 @@ module "source_db_compute" {
 	assign_public_ip      	= var.source_db_assign_public_ip
 }
 
-output "Source_DB_Public_IP" {
-  value = module.source_db_compute.Source_DB_Public_IP
+module "goldengate_deployment" {
+	source		= "./goldengate"
+	compartment_id 	= var.compartment_ocid
+	core_count		= var.deployment_cpu_core_count
+	deployment_type = var.deployment_deployment_type
+	display_name    = var.deployment_display_name
+	auto_scaling	= var.deployment_is_auto_scaling_enabled
+	license_model	= var.deployment_license_model
+	subnet_id	= oci_core_subnet.holvcn_public_subnet.id
+	is_public 	= var.deployment_is_public
+	admin_password  = var.deployment_ogg_data_admin_password
+    admin_username  = var.deployment_ogg_data_admin_username
+    deployment_name = module.target_registration.deployment_name
 }
 
-output "ATP_generated_password" {
-  value = module.atp.ATP_generated_password
+module "target_registration" {
+	source 		= "./targetregistration"
+	alias_name     	= var.target_alias_name
+	compartment_id 	= var.compartment_ocid
+	database_id 	= module.atp.database_id
+	display_name 	= var.target_display_name
+	fqdn         	= "adb.${var.region}.oraclecloud.com"
+	password 		= var.target_password
+	username 		= var.target_username
+}
+
+module "source_registration" {
+	source 		= "./sourceregistration"
+	alias_name     	= var.source_alias_name
+	compartment_id 	= var.compartment_ocid
+	connection_string = "${module.source_db_compute.Source_DB_Public_IP}:1521/ORCL"
+	display_name 	= var.source_display_name
+	fqdn        = "${var.source_db_hostname_label}.${var.holvcn_public_dns_label}.${var.holvcn_dns_label}.oraclevcn.com"
+	password 	= var.source_password
+	username 	= var.source_username
+}
+output "Source_DB_Public_IP" {
+  value = module.source_db_compute.Source_DB_Public_IP
 }

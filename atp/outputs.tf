@@ -4,3 +4,6 @@ output "ATP_generated_password" {
 output "wallet" {
   value = oci_database_autonomous_database_wallet.wallet.content
 }
+output "database_id" {
+  value = oci_database_autonomous_database.target_atp.id
+}
