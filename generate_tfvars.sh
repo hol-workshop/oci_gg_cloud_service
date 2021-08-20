@@ -8,15 +8,15 @@ sed -e 's/,//g' -e 's/"//g')
 var_region=$(printenv REGION)
 
 function check_tenancy() {
- echo "tenancy_ocid = \"$var_tenancy_ocid\"" >> variables.tf
+ echo "tenancy_ocid = \"$var_tenancy_ocid\"" >> terraform.tfvars
 }
 
 function check_compartment() {
- echo "compartment_ocid = \"$var_tenancy_ocid\"" >> variables.tf
+ echo "compartment_ocid = \"$var_tenancy_ocid\"" >> terraform.tfvars
 }
 
 function check_region() {
-echo "region = \"$var_region\"" >> variables.tf
+echo "region = \"$var_region\"" >> terraform.tfvars
 }
 
 check_tenancy
