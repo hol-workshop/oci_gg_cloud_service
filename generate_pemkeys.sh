@@ -15,9 +15,8 @@ function generate_public_api_key() {
 function generate_fingerprint() {
    openssl rsa -pubout -outform DER -in ~/.ssh/oci_api_key.pem | openssl md5 -c | awk '{print $2}' > ~/.ssh/oci_api_key.fingerprint
    echo "-----------------------------------------------"
-   echo "  Now copy the below FINGERPRINT as instructed"
-   echo "-----------------------------------------------"
-   cat ~/.ssh/oci_api_key.fingerprint
+   echo "  Now copy the below output as instructed"
+   cat ~/.ssh/oci_api_key_public.pem
 }
 
 generate_key
