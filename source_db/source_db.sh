@@ -14,10 +14,10 @@ sudo chown oracle:oinstall /home/oracle/update.sql
 pid=`pgrep buildcluster.sh`
 while kill -0 $pid >/dev/null 2>&1
 do
-  echo $pid
+  #echo $pid
   sleep 60
 done
-  echo "process is done"
+  #echo "process is done"
   sudo su - oracle bash -c 'sqlplus / as sysdba @/home/oracle/script.sql'
 
 sudo firewall-cmd --zone=public --permanent --add-port=22/tcp
