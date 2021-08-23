@@ -15,7 +15,7 @@ pid=`pgrep buildcluster.sh`
 while kill -0 $pid >/dev/null 2>&1
 do
   echo $pid
-  sleep 0.5
+  sleep 60
 done
   echo "process is done"
   sudo su - oracle bash -c 'sqlplus / as sysdba @/home/oracle/script.sql'
