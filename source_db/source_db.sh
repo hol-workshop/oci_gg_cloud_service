@@ -20,6 +20,9 @@ done
   echo "process is done"
   sudo su - oracle bash -c 'sqlplus / as sysdba @/home/oracle/script.sql'
 
+sudo firewall-cmd --zone=public --permanent --add-port=22/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=80/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=443/tcp
 sudo firewall-cmd --zone=public --permanent --add-port=1521-1522/tcp
 sudo firewall-cmd --reload
 echo "process is done"
